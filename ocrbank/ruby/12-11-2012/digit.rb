@@ -12,7 +12,7 @@ class Digit
 			"  |" + 
 			"  |" +
 			"   "
-			return 1
+			1
 		elsif @input ==
 			" _ " + 
 			" _|" + 

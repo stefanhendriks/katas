@@ -1,2 +1,1 @@
-watch('.*.rb') { |md| system "ruby ocrbank_tests.rb"}
-watch('.*.rb') { |md| system "ruby digit_tests.rb"}
+watch('.*.rb') { |md| system "ruby ocrbank_tests.rb digit_tests.rb"}
