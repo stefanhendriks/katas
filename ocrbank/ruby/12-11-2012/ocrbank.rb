@@ -1,3 +1,5 @@
+require_relative 'digit'
+
 class OCRBank
 
 	DIGIT_WIDTH = 3
@@ -19,7 +21,7 @@ class OCRBank
 
 		@result = ""		
 		(1..@digitCount).each do |digitIndex| 
-			@result += readDigit(getDigitString(@lines, digitIndex)).to_s
+			@result += (Digit.new getDigitString(@lines, digitIndex)).asInteger.to_s
 		end
 		@result.to_i
 		
