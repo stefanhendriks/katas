@@ -1,3 +1,6 @@
 # ignore all iml files
 *.iml
 */java/*/out/*
+
+#ignore all swp files (VIM)
+*.swp

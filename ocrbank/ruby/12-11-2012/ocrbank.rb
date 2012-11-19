@@ -5,13 +5,14 @@ class OCRBank
 	# this should be somewhere else, but for the sake of simplicity we keep it here now
 	def readFromFile(filename)
 		@file = File.new(filename, "r")
-		@input =""
+		@input = ""
 		while (line = @file.gets)
 			@input += line
 		end
 		read(@input)
 	end
 
+	# this converts input (as string) into a real number
 	def read(input)
 		@lines = input.split("\n")		
 		@digitCount = @lines[0].length / DIGIT_WIDTH;
@@ -24,6 +25,7 @@ class OCRBank
 		
 	end
 
+	# this method determines if a number is valid 
 	def isValidNumber(number)		
 		@sum = 0
 		(0..8).each do |position| 
@@ -35,75 +37,12 @@ class OCRBank
 
 
 	def getDigitString(lines, digitIndex) 
+		# digitIndex - 1 because array is zero based
 		@start = (digitIndex -1) * DIGIT_WIDTH
 		@lines[0][@start,DIGIT_WIDTH] + 
 		@lines[1][@start,DIGIT_WIDTH] + 
 		@lines[2][@start,DIGIT_WIDTH] +
 		@lines[3][@start,DIGIT_WIDTH]
-	end
-
-	def readDigit(input)
-		if input ==
-			"   " + 
-			"  |" + 
-			"  |" +
-			"   "
-			1
-		elsif input ==
-			" _ " + 
-			" _|" + 
-			"|_ " +
-			"   "
-			2
-		elsif input ==
-			" _ " + 
-			" _|" + 
-			" _|" +
-			"   "
-			3
-		elsif input ==
-			"   " + 
-			"|_|" + 
-			"  |" +
-			"   "
-			4
-		elsif input ==
-			" _ " + 
-			"|_ " + 
-			" _|" +
-			"   "
-			5
-		elsif input ==
-			" _ " + 
-			"|_ " + 
-			"|_|" +
-			"   "
-			6
-		elsif input ==
-			" _ " + 
-			"  |" + 
-			"  |" +
-			"   "
-			7
-		elsif input ==
-			" _ " + 
-			"|_|" + 
-			"|_|" +
-			"   "
-			8
-		elsif input ==
-			" _ " + 
-			"|_|" + 
-			" _|" +
-			"   "
-			9
-		elsif input ==
-			" _ " + 
-			"| |" + 
-			"|_|" +
-			"   "
-			0
-		end
 	end
 
 end
