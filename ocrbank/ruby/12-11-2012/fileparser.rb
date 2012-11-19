@@ -6,7 +6,6 @@ class FileParser
 		@ocrbank = ocrbank
 	end
 
-	# this should be somewhere else, but for the sake of simplicity we keep it here now
 	def readFromFile(filename)
 		file = File.new(filename, "r")
 		input = ""
@@ -14,7 +13,10 @@ class FileParser
 			input += line
 		end
 		lines = input.split("\n")
-		@ocrbank.read(lines)
+
+		lines.each_slice(4) do | slice |
+			@ocrbank.read(slice)
+		end
 	end
 
 end
