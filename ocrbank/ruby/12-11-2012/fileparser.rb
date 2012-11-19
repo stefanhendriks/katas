@@ -8,12 +8,13 @@ class FileParser
 
 	# this should be somewhere else, but for the sake of simplicity we keep it here now
 	def readFromFile(filename)
-		@file = File.new(filename, "r")
-		@input = ""
-		while (line = @file.gets)
-			@input += line
+		file = File.new(filename, "r")
+		input = ""
+		while (line = file.gets)
+			input += line
 		end
-		@ocrbank.read(@input)
+		lines = input.split("\n")
+		@ocrbank.read(lines)
 	end
 
 end

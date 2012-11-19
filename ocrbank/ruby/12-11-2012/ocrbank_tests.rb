@@ -20,34 +20,32 @@ class OCRBankTest < Test::Unit::TestCase
 
 	def test_should_read_11
 		@b = OCRBank.new
-		@result = @b.read(
-			"      \n" + 
-			"  |  |\n" + 
-			"  |  |\n" +
-			"      ")
+		@result = @b.read(["      ", 
+						   "  |  |", 
+						   "  |  |",
+						   "      "])
 
 		assert_equal 11, @result
 	end
 
 	def test_should_read_12
 		@b = OCRBank.new
-		@result = @b.read(
-			"    _ \n" + 
-			"  | _|\n" + 
-			"  ||_ \n" +
-			"      ")
+		@result = @b.read([
+			"    _ ", 
+			"  | _|", 
+			"  ||_ ",
+			"      "])
 
 		assert_equal 12, @result
 	end	
 
 	def test_should_read_1234567890
 		@b = OCRBank.new
-		@result = @b.read(
-			"    _  _     _  _  _  _  _  _ \n" + 
-			"  | _| _||_||_ |_   ||_||_|| |\n" + 
-			"  ||_  _|  | _||_|  ||_| _||_|\n" + 
-			"                              "
-				)
+		@result = @b.read([
+			"    _  _     _  _  _  _  _  _ \n", 
+			"  | _| _||_||_ |_   ||_||_|| |\n", 
+			"  ||_  _|  | _||_|  ||_| _||_|\n", 
+			"                              "])
 
 		assert_equal 1234567890, @result
 	end	
