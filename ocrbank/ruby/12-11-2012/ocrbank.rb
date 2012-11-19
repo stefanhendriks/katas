@@ -4,16 +4,6 @@ class OCRBank
 
 	DIGIT_WIDTH = 3
 
-	# this should be somewhere else, but for the sake of simplicity we keep it here now
-	def readFromFile(filename)
-		@file = File.new(filename, "r")
-		@input = ""
-		while (line = @file.gets)
-			@input += line
-		end
-		read(@input)
-	end
-
 	# this converts input (as string) into a real number
 	def read(input)
 		@lines = input.split("\n")		

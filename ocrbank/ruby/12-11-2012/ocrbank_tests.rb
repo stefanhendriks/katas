@@ -3,14 +3,6 @@ require "./ocrbank.rb"
 
 class OCRBankTest < Test::Unit::TestCase
 
-	# still todo: multi-line file reading/results 
-	def test_should_read_1234567890_from_file
-		@b = OCRBank.new
-		@result = @b.readFromFile("one_entry.txt")
-		assert_equal 1234567890, @result
-	end
-
-
 	def test_is_valid_code_with_valid_checksum
 		@b = OCRBank.new
 		assert_equal true, @b.isValidNumber(345882865)
