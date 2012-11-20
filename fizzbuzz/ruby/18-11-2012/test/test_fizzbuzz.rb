@@ -1,5 +1,5 @@
 require "test/unit"
-require "./fizzbuzz.rb"
+require "fizzbuzz"
 
 
 class FizzBuzzTest < Test::Unit::TestCase
