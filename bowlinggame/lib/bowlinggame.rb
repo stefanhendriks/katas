@@ -12,7 +12,8 @@ class BowlingGame
 
 	def score
 		score = 0
-		10.times do |frame|
+		frames = 1..10
+		frames.each do |frame|
 			score += @rolls[frame]
 			score += @rolls[frame + 1]
 		end
