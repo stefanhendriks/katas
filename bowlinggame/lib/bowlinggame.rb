@@ -14,8 +14,8 @@ class BowlingGame
 		score = 0
 		frames = 1..10
 		frames.each do |frame|
-			score += @rolls[frame]
-			score += @rolls[frame + 1]
+			frame_score = (@rolls[frame] + @rolls[frame + 1])
+			score += frame_score
 		end
 		score
 	end
