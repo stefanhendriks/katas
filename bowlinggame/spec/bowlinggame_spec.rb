@@ -3,12 +3,6 @@ require 'bowlinggame'
 
 describe BowlingGame do
 
-	def roll(n, amount) 
-		n.times do
-			@game.roll amount
-		end
-	end
-
 	context "Scoring after a complete game" do
 	
 		before (:each) do
@@ -35,6 +29,11 @@ describe BowlingGame do
 
 	end
 
+	def roll(n, amount) 
+		n.times do
+			@game.roll amount
+		end
+	end
 
 end
 
