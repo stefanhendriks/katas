@@ -11,7 +11,12 @@ class BowlingGame
 	end
 
 	def score
-		@rolls.inject(:+)
+		score = 0
+		10.times do |frame|
+			score += @rolls[frame]
+			score += @rolls[frame + 1]
+		end
+		score
 	end
 
 end
