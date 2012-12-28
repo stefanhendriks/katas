@@ -16,14 +16,20 @@ class BowlingGame
 		
 		rollIndex = 0
 		frames.each do |frame|
-			frame_score = frame_score(rollIndex)
-		   if spare?(frame_score)
+			frame_score = frame_score(rollIndex) # this is ugly, we dont know if its a spare or strike?
+			if @rolls[rollIndex] == 10 # this is ugly
+				score += 10
+				score += @rolls[rollIndex + 1]
+				score += @rolls[rollIndex + 2]
+				rollIndex += 1
+			elsif spare?(frame_score) # based on total frame score, which is ambigous
 				score += 10
 				score += @rolls[rollIndex + 2]
-			elsif
+				rollIndex += 2
+			else
 				score += frame_score
+				rollIndex += 2 # can't we do better than this?
 			end
-			rollIndex += 2
 		end
 
 		score

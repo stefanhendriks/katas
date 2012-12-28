@@ -26,6 +26,20 @@ describe BowlingGame do
 			@game.score.should == 16
 		end
 
+		it "should score 25 for four times 5 and all zeroes" do
+			roll_many 4, 5
+			roll_many 16, 0
+			@game.score.should == 25 
+		end
+
+		it "should score 28 for one strike and 3 and 9 and all zeroes" do
+			roll_once 10 #strike
+			roll_once 3
+			roll_once 6
+			roll_many 16, 0
+			@game.score.should == 28
+		end
+
 	end
 
 	def roll_spare
