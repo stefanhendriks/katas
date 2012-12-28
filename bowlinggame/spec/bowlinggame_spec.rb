@@ -10,26 +10,34 @@ describe BowlingGame do
 		end
 
 		it "should score 0 for a gutter game" do
-			roll 20, 0
+			roll_many 20, 0
 			@game.score.should == 0
 		end
 
 		it "should score 20 for all ones" do
-			roll 20, 1
+			roll_many 20, 1
 			@game.score.should == 20
 		end
 
 		it "should score 16 for one spare and three" do
-			@game.roll 5
-			@game.roll 5 # spare
-			@game.roll 3
-			roll 17, 0
+			roll_spare
+			roll_once 3
+			roll_many 17, 0
 			@game.score.should == 16
 		end
 
 	end
 
-	def roll(n, amount) 
+	def roll_spare
+		roll_once 5
+		roll_once 5
+	end
+
+	def roll_once (amount)
+		@game.roll amount
+	end
+
+	def roll_many(n, amount) 
 		n.times do
 			@game.roll amount
 		end

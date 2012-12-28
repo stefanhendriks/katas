@@ -13,10 +13,11 @@ class BowlingGame
 	def score
 		score = 0
 		frames = 1..10
+		
 		rollIndex = 0
 		frames.each do |frame|
-			frame_score = (@rolls[rollIndex] + @rolls[rollIndex + 1])
-		   if frame_score == 10
+			frame_score = frame_score(rollIndex)
+		   if spare?(frame_score)
 				score += 10
 				score += @rolls[rollIndex + 2]
 			elsif
@@ -24,8 +25,18 @@ class BowlingGame
 			end
 			rollIndex += 2
 		end
+
 		score
 	end
 
-end
+	private
 
+	def spare?(score)
+		true if score == 10
+	end
+
+	def frame_score(roll_index)
+		(@rolls[roll_index] + @rolls[roll_index + 1])
+	end
+
+end
