@@ -40,6 +40,11 @@ describe BowlingGame do
 			@game.score.should == 28
 		end
 
+		it "should score 300 for a perfect game" do
+			roll_many 12, 10
+			@game.score.should == 300
+		end
+
 	end
 
 	def roll_spare
