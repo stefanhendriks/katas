@@ -14,35 +14,32 @@ class BowlingGame
 		score = 0
 		frames = 1..10
 		
-		rollIndex = 0
-		frames.each do |frame|
-			frame_score = frame_score(rollIndex) # this is ugly, we dont know if its a spare or strike?
-			if @rolls[rollIndex] == 10 # this is ugly
+		roll_index = 0
+		frames.each do |frame| # within here we enter the context of frames
+			first_roll_in_assumed_normal_frame = @rolls[roll_index]
+			second_roll_in_assumed_normal_frame = @rolls[roll_index + 1]
+
+			if first_roll_in_assumed_normal_frame == 10 
 				score += 10
-				score += @rolls[rollIndex + 1]
-				score += @rolls[rollIndex + 2]
-				rollIndex += 1
-			elsif spare?(frame_score) # based on total frame score, which is ambigous
+
+				first_roll_in_next_frame = @rolls[roll_index + 1]
+				second_roll_in_next_frame = @rolls[roll_index + 2]
+
+				score += first_roll_in_next_frame
+				score += second_roll_in_next_frame 
+				roll_index += 1
+			elsif (first_roll_in_assumed_normal_frame + second_roll_in_assumed_normal_frame) == 10 
 				score += 10
-				score += @rolls[rollIndex + 2]
-				rollIndex += 2
+				score += @rolls[roll_index + 2]
+				roll_index += 2
 			else
-				score += frame_score
-				rollIndex += 2 # can't we do better than this?
+				score += first_roll_in_assumed_normal_frame
+				score += second_roll_in_assumed_normal_frame
+				roll_index += 2 # can't we do better than this?
 			end
 		end
 
 		score
-	end
-
-	private
-
-	def spare?(score)
-		true if score == 10
-	end
-
-	def frame_score(roll_index)
-		(@rolls[roll_index] + @rolls[roll_index + 1])
 	end
 
 end
