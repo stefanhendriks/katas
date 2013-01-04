@@ -23,15 +23,27 @@ describe GameOfLife do
 					dies(live_neighbours).should eq(must_die)
 				end
 			end
+
+			def dies(live_neighbours)
+				live_neighbours < 2 || live_neighbours >= 4
+			end
 		end
+
 
 		context "dead cell" do
-			it "becomes a live cell with exactly three live neighbours"
+
+			it "becomes a live cell with exactly three live neighbours" do
+				live_neighbours = 3
+				becomes_alive(live_neighbours).should eq(true)	
+			end
+
+			def becomes_alive(live_neighbours)
+				live_neighbours == 3
+			end
 		end
 
-		def dies(live_neighbours)
-			live_neighbours < 2 || live_neighbours >= 4
-		end
+
+
 	end
 
 
