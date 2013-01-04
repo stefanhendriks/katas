@@ -15,8 +15,12 @@ describe GameOfLife do
 				dies(live_neighbours).should be_true
 			end
 
-			pending "dies with more than three live neighbours" do
-				
+			context "dies with more than three live neighbours" do
+				[4].each do |live_neighbours|
+					it "dies with #{live_neighbours}" do
+						dies(live_neighbours).should be_true	
+					end
+				end
 			end
 
 			it "lives with two or three live neighbours"
@@ -25,10 +29,11 @@ describe GameOfLife do
 		context "dead cell" do
 			it "becomes a live cell with exactly three live neighbours"
 		end
+
+		def dies(live_neighbours)
+			live_neighbours < 2 || live_neighbours == 4
+		end
 	end
 
-	def dies(live_neighbours)
-		live_neighbours < 2
-	end
 
 end
