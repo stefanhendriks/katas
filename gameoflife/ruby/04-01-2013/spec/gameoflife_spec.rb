@@ -23,7 +23,15 @@ describe GameOfLife do
 				end
 			end
 
-			it "lives with two or three live neighbours"
+			it "lives with two neighbours" do
+				live_neighbours = 2
+				dies(live_neighbours).should be_false
+			end
+
+			it "lives with three live neighbours" do
+				live_neighbours = 3
+				dies(live_neighbours).should be_false
+			end
 		end
 
 		context "dead cell" do
