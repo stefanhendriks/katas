@@ -72,7 +72,28 @@ describe GameOfLife do
 	end
 
 	context "input output" do
-		it "should return an empty board given an empty board"
+
+		it "should return an empty board given an empty board" do
+			input =
+			"4 8\n" +
+			"........\n" +
+			"........\n" +
+			"........\n" +
+			"........\n"
+
+			expected = 
+			"4 8\n" +
+			"........\n" +
+			"........\n" +
+			"........\n" +
+			"........\n" 
+
+			evolve(input).should eq(expected)
+		end
+
+		def evolve(input)
+			input
+		end
 
 	end
 
