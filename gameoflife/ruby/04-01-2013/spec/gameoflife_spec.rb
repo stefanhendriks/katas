@@ -2,7 +2,7 @@ require 'gameoflife'
 
 describe GameOfLife do
 
-	context "generation evaluation" do
+	context "evolving" do
 
 		context "alive cell" do
 			{
@@ -28,7 +28,6 @@ describe GameOfLife do
 			end
 		end
 
-
 		context "dead cell" do
 
 			it "becomes a live cell with exactly three live neighbours" do
@@ -44,6 +43,67 @@ describe GameOfLife do
 	end
 
 	context "grid" do
+
+		context "counting neighbours" do
+			{ 	
+				"3 3\n" + 
+           	"...\n" +
+           	"...\n" +
+           	"...\n" => 0,
+
+				"3 3\n" + 
+           	"...\n" +
+           	".*.\n" +
+           	"...\n" => 0,
+				
+				"3 3\n" + 
+           	"*..\n" +
+           	".*.\n" +
+           	"...\n" => 1,
+				
+				"3 3\n" + 
+           	"**.\n" +
+           	".*.\n" +
+           	"...\n" => 2,
+
+				"3 3\n" + 
+           	"***\n" +
+           	".*.\n" +
+           	"...\n" => 3,
+
+				"3 3\n" + 
+           	"***\n" +
+           	"**.\n" +
+           	"...\n" => 4,
+				
+				"3 3\n" + 
+           	"***\n" +
+           	"***\n" +
+           	"...\n" => 5,
+
+				"3 3\n" + 
+           	"***\n" +
+           	"***\n" +
+           	"*..\n" => 6,
+
+				"3 3\n" + 
+           	"***\n" +
+           	"***\n" +
+           	"**.\n" => 7,
+
+				"3 3\n" + 
+           	"***\n" +
+           	"***\n" +
+           	"***\n" => 8,
+			}.each_pair do |input, neighbourcount| 
+				it "should return expected #{neighbourcount} neighbours for input #{input}" do
+					grid = Grid.new(input)
+					grid.live_neighbours(1, 1).should == neighbourcount
+				end
+	
+			end
+		end
+
 		context "input to data mapping" do
 			it "returns an array with the given dimensions in input" do
 				input = 
