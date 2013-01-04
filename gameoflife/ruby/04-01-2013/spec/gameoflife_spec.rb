@@ -4,33 +4,24 @@ describe GameOfLife do
 
 	context "generation evaluation" do
 		
+
 		context "alive cell" do
-			it "dies with one live neighbour, as if caused by underpopulation." do
-				live_neighbours = 1
-				dies(live_neighbours).should be_true
-			end
-			
-			it "dies with zero live neighbours, as if caused by underpopulation." do
-				live_neighbours = 0
-				dies(live_neighbours).should be_true
-			end
-
-			context "dies with more than three live neighbours" do
-				[4,5,6,7,8].each do |live_neighbours|
-					it "dies with #{live_neighbours}" do
-						dies(live_neighbours).should be_true, "expected to die with #{live_neighbours} live neighbours"	
-					end
+			{
+				0 => true,
+				1 => true,
+				2 => false,
+				3 => false,
+				4 => true,
+				5 => true,
+				6 => true,
+				7 => true,
+				8 => true
+			}.each_pair do |live_neighbours, must_die|
+				expectation = must_die ? "to die" : "to stay alive"
+				description = "is expected #{expectation} with #{live_neighbours} live neighbours" 
+				it "#{description}" do
+					dies(live_neighbours).should eq(must_die)
 				end
-			end
-
-			it "lives with two neighbours" do
-				live_neighbours = 2
-				dies(live_neighbours).should be_false
-			end
-
-			it "lives with three live neighbours" do
-				live_neighbours = 3
-				dies(live_neighbours).should be_false
 			end
 		end
 
