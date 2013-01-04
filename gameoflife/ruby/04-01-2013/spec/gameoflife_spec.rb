@@ -42,13 +42,70 @@ describe GameOfLife do
 			end
 		end
 
-
 	end
 
 	context "input to data mapping" do
-		it "returns an array with the given dimensions in input"
-		it "returns an array of only dead cells"
-		it "returns an array with one live cell"
+		it "returns an array with the given dimensions in input" do
+			input = 
+			"2 2\n" +
+			"..\n" +
+			"..\n"
+			
+			data = read_map(input)
+			data.size.should == 2
+			data[0].size.should == 2
+		end
+
+		it "returns an array of only dead cells" do
+			input = 
+			"2 2\n" +
+			"..\n" +
+			"..\n"
+		
+			expected = [
+				[false, false],
+				[false, false]
+			]
+
+			data = read_map(input)
+			data.should eq(expected)
+		end
+
+
+		it "returns an array with one live cell" do
+			input = 
+			"2 2\n" +
+			".*\n" +
+			"*.\n"
+		
+			expected = [
+				[false, true],
+				[true, false]
+			]
+
+			data = read_map(input)
+			data.should eq(expected)
+		end
+
+		def read_map(input)
+			input_lines = input.split(/\n/)
+			first_line = input_lines[0]
+
+			width = first_line.split(' ')[1].to_i
+			height = first_line.split(' ')[0].to_i
+
+			lines = []
+			for i in 1..height
+				line = []
+				il = input_lines[i]
+				for j in 1..width
+					char = il[(j-1)]
+					line << (char == "." ? false : true)
+				end
+				lines << line
+			end
+			lines
+		end
 	end
 
 	context "drawing output" do
