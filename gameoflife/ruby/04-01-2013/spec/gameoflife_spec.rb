@@ -5,13 +5,22 @@ describe GameOfLife do
 	context "generation evaluation" do
 		
 		context "alive cell" do
-			it "dies with fewer than two live neighbours, as if caused by underpopulation." do
+			it "dies with one live neighbour, as if caused by underpopulation." do
 				live_neighbours = 1
 				dies = live_neighbours < 2
 				dies.should be_true
 			end
 			
-			it "dies with more than three live neighbours"
+			it "dies with zero live neighbours, as if caused by underpopulation." do
+				live_neighbours = 0
+				dies = live_neighbours < 2
+				dies.should be_true
+			end
+
+			pending "dies with more than three live neighbours" do
+				
+			end
+
 			it "lives with two or three live neighbours"
 		end
 
