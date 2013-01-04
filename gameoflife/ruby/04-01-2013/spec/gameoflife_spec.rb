@@ -45,6 +45,12 @@ describe GameOfLife do
 
 	end
 
+	context "input to data mapping" do
+		it "returns an array with the given dimensions in input"
+		it "returns an array of only dead cells"
+		it "returns an array with one live cell"
+	end
+
 	context "drawing output" do
 
 		it "should draw a grid with given dimensions" do
@@ -56,6 +62,29 @@ describe GameOfLife do
 				"........\n" + 
 				"........\n"
 			output(width, height).should eq(expected)
+		end
+
+		it "should draw an empty grid of 1x1" do
+			expected = ".\n"
+			grid = [[false]]
+			output_grid(grid).should eq(expected)	
+		end
+
+		it "should draw an empty grid of 1x1" do
+			expected = "*\n"
+			grid = [[true]]
+			output_grid(grid).should eq(expected)	
+		end
+
+		def output_grid(grid) 
+			str = ""
+			grid.each do | line |
+				line.each do | cell |
+					str += cell ? "*" : "."
+				end
+				str += "\n"
+			end
+			str
 		end
 
 		def output(width, height)
@@ -78,6 +107,24 @@ describe GameOfLife do
 			"4 8\n" +
 			"........\n" +
 			"........\n" +
+			"........\n" +
+			"........\n"
+
+			expected = 
+			"4 8\n" +
+			"........\n" +
+			"........\n" +
+			"........\n" +
+			"........\n" 
+
+			evolve(input).should eq(expected)
+		end
+
+		pending "should return an empty board, given a board with a single cell" do
+			input =
+			"4 8\n" +
+			"........\n" +
+			"...*....\n" +
 			"........\n" +
 			"........\n"
 
