@@ -43,8 +43,37 @@ describe GameOfLife do
 		end
 
 
+	end
+
+	context "drawing output" do
+
+		it "should draw a grid with given dimensions" do
+			height = 4
+			width = 8
+			expected = 
+				"........\n" + 
+				"........\n" + 
+				"........\n" + 
+				"........\n"
+			output(width, height).should eq(expected)
+		end
+
+		def output(width, height)
+			str = ""
+			for i in 1..height
+				for j in 1..width
+					str += "."
+				end
+				str += "\n"
+			end		
+			str
+		end
 
 	end
 
+	context "input output" do
+		it "should return an empty board given an empty board"
+
+	end
 
 end
