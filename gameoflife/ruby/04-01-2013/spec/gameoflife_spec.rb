@@ -3,7 +3,6 @@ require 'gameoflife'
 describe GameOfLife do
 
 	context "generation evaluation" do
-		
 
 		context "alive cell" do
 			{
@@ -44,117 +43,99 @@ describe GameOfLife do
 
 	end
 
-	context "input to data mapping" do
-		it "returns an array with the given dimensions in input" do
-			input = 
-			"2 2\n" +
-			"..\n" +
-			"..\n"
+	context "grid" do
+		context "input to data mapping" do
+			it "returns an array with the given dimensions in input" do
+				input = 
+				"2 2\n" +
+				"..\n" +
+				"..\n"
+				
+				grid = Grid.new(input)
+				grid.width.should == 2
+				grid.height.should == 2
+			end
+
+			it "returns an array of only dead cells" do
+				input = 
+				"2 2\n" +
+				"..\n" +
+				"..\n"
 			
-			data = read_map(input)
-			data.size.should == 2
-			data[0].size.should == 2
-		end
+				expected = [
+					[false, false],
+					[false, false]
+				]
 
-		it "returns an array of only dead cells" do
-			input = 
-			"2 2\n" +
-			"..\n" +
-			"..\n"
-		
-			expected = [
-				[false, false],
-				[false, false]
-			]
-
-			data = read_map(input)
-			data.should eq(expected)
-		end
-
-
-		it "returns an array with one live cell" do
-			input = 
-			"2 2\n" +
-			".*\n" +
-			"*.\n"
-		
-			expected = [
-				[false, true],
-				[true, false]
-			]
-
-			data = read_map(input)
-			data.should eq(expected)
-		end
-
-		def read_map(input)
-			input_lines = input.split(/\n/)
-			first_line = input_lines[0]
-
-			width = first_line.split(' ')[1].to_i
-			height = first_line.split(' ')[0].to_i
-
-			lines = []
-			for i in 1..height
-				line = []
-				il = input_lines[i]
-				for j in 1..width
-					char = il[(j-1)]
-					line << (char == "." ? false : true)
-				end
-				lines << line
+				grid = Grid.new(input)
+				grid.data.should eq(expected)
 			end
-			lines
-		end
-	end
 
-	context "drawing output" do
 
-		it "should draw a grid with given dimensions" do
-			height = 4
-			width = 8
-			expected = 
-				"........\n" + 
-				"........\n" + 
-				"........\n" + 
-				"........\n"
-			output(width, height).should eq(expected)
-		end
+			it "returns an array with one live cell" do
+				input = 
+				"2 2\n" +
+				".*\n" +
+				"*.\n"
+			
+				expected = [
+					[false, true],
+					[true, false]
+				]
 
-		it "should draw an empty grid of 1x1" do
-			expected = ".\n"
-			grid = [[false]]
-			output_grid(grid).should eq(expected)	
-		end
-
-		it "should draw an empty grid of 1x1" do
-			expected = "*\n"
-			grid = [[true]]
-			output_grid(grid).should eq(expected)	
-		end
-
-		def output_grid(grid) 
-			str = ""
-			grid.each do | line |
-				line.each do | cell |
-					str += cell ? "*" : "."
-				end
-				str += "\n"
+				grid = Grid.new(input)
+				grid.data.should eq(expected)
 			end
-			str
 		end
 
-		def output(width, height)
-			str = ""
-			for i in 1..height
-				for j in 1..width
-					str += "."
+		context "drawing" do
+
+			it "should draw a grid with given dimensions" do
+				height = 4
+				width = 8
+				expected = 
+					"........\n" + 
+					"........\n" + 
+					"........\n" + 
+					"........\n"
+				output(width, height).should eq(expected)
+			end
+
+			it "should draw an empty grid of 1x1" do
+				expected = ".\n"
+				grid = [[false]]
+				output_grid(grid).should eq(expected)	
+			end
+
+			it "should draw an empty grid of 1x1" do
+				expected = "*\n"
+				grid = [[true]]
+				output_grid(grid).should eq(expected)	
+			end
+
+			def output_grid(grid) 
+				str = ""
+				grid.each do | line |
+					line.each do | cell |
+						str += cell ? "*" : "."
+					end
+					str += "\n"
 				end
-				str += "\n"
-			end		
-			str
-		end
+				str
+			end
 
+			def output(width, height)
+				str = ""
+				for i in 1..height
+					for j in 1..width
+						str += "."
+					end
+					str += "\n"
+				end		
+				str
+			end
+
+		end
 	end
 
 	context "input output" do
@@ -202,3 +183,4 @@ describe GameOfLife do
 	end
 
 end
+
