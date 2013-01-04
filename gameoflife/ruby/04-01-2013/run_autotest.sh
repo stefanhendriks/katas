@@ -1,0 +1,1 @@
+autotest --style rspec2 

@@ -16,25 +16,21 @@ class BowlingGame
 		
 		roll_index = 0
 		frames.each do |frame| # within here we enter the context of frames
-			first_roll_in_assumed_normal_frame = @rolls[roll_index]
-			second_roll_in_assumed_normal_frame = @rolls[roll_index + 1]
-
-			if first_roll_in_assumed_normal_frame == 10 
+			frame_window = create_frame(roll_index) 
+			if frame_window.strike? # this hides the fact that it is the first roll in a frame 
 				score += 10
-
-				first_roll_in_next_frame = @rolls[roll_index + 1]
-				second_roll_in_next_frame = @rolls[roll_index + 2]
-
-				score += first_roll_in_next_frame
-				score += second_roll_in_next_frame 
+				next_frame = create_frame(roll_index + 1)
+				score += next_frame.score?
 				roll_index += 1
-			elsif (first_roll_in_assumed_normal_frame + second_roll_in_assumed_normal_frame) == 10 
+				next
+			end
+
+			if frame_window.spare?
 				score += 10
 				score += @rolls[roll_index + 2]
 				roll_index += 2
 			else
-				score += first_roll_in_assumed_normal_frame
-				score += second_roll_in_assumed_normal_frame
+				score += frame_window.score?
 				roll_index += 2 # can't we do better than this?
 			end
 		end
@@ -42,4 +38,29 @@ class BowlingGame
 		score
 	end
 
+	def create_frame(roll_index)
+		Frame.new(@rolls[roll_index], @rolls[roll_index + 1])
+	end
+
+end
+
+class Frame
+	attr_reader :first_roll, :second_roll
+	
+	def initialize(first_roll, second_roll)
+		@first_roll = first_roll
+		@second_roll = second_roll
+	end
+	
+	def strike?
+			@first_roll == 10
+	end
+
+	def spare?
+		score? == 10
+	end
+
+	def score?
+			@first_roll + @second_roll
+	end
 end
