@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+  <p class="error"><%= flash[:error] %></p>
+<% end %>
+
+
+<form action="/" enctype="multipart/form-data">
+	<input type="file" name="somename"/> 
+	<input type="submit" name="submit" value="upload"/>
+</form>
+
 <%= yield %>
 
 </body>
