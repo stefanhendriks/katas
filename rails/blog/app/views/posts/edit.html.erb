@@ -1,0 +1,21 @@
+<%= link_to "To index", posts_path %>
+
+<h1>Edit post</h1>
+
+<%= form_for @post do |f| %>
+  <%= f.error_messages %>
+
+  <p class="formfield">
+    <%= f.label :title %>:
+    <%= f.text_field :title %>
+  </p>
+
+  <p class="formfield">
+    <%= f.label :content %>:<br/>
+    <%= f.text_area :content %>
+  </p>
+
+  <%= f.submit "Save" %>
+  <%= link_to "View post", post_path %>
+
+<% end %>

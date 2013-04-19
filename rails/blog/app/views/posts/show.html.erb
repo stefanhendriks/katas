@@ -1,0 +1,8 @@
+<%= link_to "To home", posts_path %>
+<h1><%= @post.title %></h1>
+
+<%= simple_format @post.content %>
+
+<p>
+<%= link_to "Edit", edit_post_path %>
+</p>

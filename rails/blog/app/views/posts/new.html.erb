@@ -1,0 +1,17 @@
+<%= link_to "To index", posts_path %>
+<h1>New post</h1>
+<%= form_for @post do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %>:
+    <%= f.text_field :title %>
+  </p>
+
+  <p class="formfield">
+    <%= f.label :content %>:<br/>
+    <%= f.text_area :content %>
+  </p>
+
+  <%= f.submit "Save" %>
+
+<% end %>
